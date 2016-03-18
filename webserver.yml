@@ -1,0 +1,17 @@
+---
+- hosts: webservers
+  remote_user: root
+  tasks:
+        - name: install httpd
+          yum: name=httpd
+
+        - name: copy index.html
+          template: >
+                  src=templates/index.html.j2
+                  dest=/var/www/html/index.html
+                  mode=0644
+        - name: ensure apache is running (and enable it at boot)
+          service: >
+                  name=httpd
+                  state=started
+                  enabled=yes

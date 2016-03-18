@@ -1,0 +1,9 @@
+---
+- name: Built in variables
+  hosts: testservers
+  gather_facts: True
+  tasks:
+          - debug: var=hostvars['serverb.lab.example.com'].ansible_eth0.ipv4.address    
+          - debug: {% for host in groups.testservers %}
+                      var=server host.inventory_hostname host.ansible_default_ipv4.address
+                   {% endfor %}  

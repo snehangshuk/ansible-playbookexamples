@@ -1,0 +1,7 @@
+---
+- hosts: testservers
+  tasks:
+          - name: Iterate through groups
+            debug: msg="{{ hostvars[item].ansible_eth0.ipv4.address }}"
+            with_items: 
+                  - "{{ groups['testservers'] }}"

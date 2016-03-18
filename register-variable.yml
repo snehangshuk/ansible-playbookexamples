@@ -1,0 +1,10 @@
+---
+- hosts: webservers
+#become: yes
+  tasks:
+          - name: capture output of id command
+            command: "whoami"
+            register: login
+            ignore_errors: True        
+          #- debug: var=result
+          - debug: msg="Logged in as user {{ login.stdout }}"
